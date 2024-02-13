@@ -40,13 +40,19 @@ noButton.onclick = function(){
 }
 
 yesButton.onclick = function(){
-	heartGrowing = true;
-	heartGrown = false;
-	heartFixing = false;
-	heartBreaking = false;
-	heartBroken = false;
+	if (!heartGrown){
+		heartGrowing = true;
+		heartGrown = false;
+		heartFixing = false;
+		heartBreaking = false;
+		heartBroken = false;
 
 	timeStart = Date.now();
+	}
+	else{
+		texts.push({"x":canvas.width/2,"y":canvas.height/2-50,"time":0});
+	}
+	
 }
 
 function drawText(){
@@ -122,7 +128,6 @@ function drawExplosion(){
 	explosion = explosion.filter(p => (p.size > 0));
 }
 
-
 function drawLeftHeart(angle, color, strokeColor){
 	context.save();
 	context.lineJoin = "round";
@@ -196,6 +201,7 @@ function growHeart(){
 		heartFixing = true;
 		timeStart = Date.now();
 		spawnConfetti(200);
+		texts.push({"x":canvas.width/2,"y":canvas.height/2-50,"time":0});
 	}
 }
 
@@ -268,8 +274,8 @@ function breakHeart(){
 		drawRightHeart(-Math.PI/4, "grey", "black");	
 	}
 	else{
-		drawLeftHeart(Math.PI/4 + (time-0.5)**2, "grey", "black");
-		drawRightHeart(-Math.PI/4 - (time-0.5)**2, "grey", "black");	
+		drawLeftHeart(Math.PI/4 + (time-0.4)**2, "grey", "black");
+		drawRightHeart(-Math.PI/4 - (time-0.4)**2, "grey", "black");	
 	}
 	
 	drawExplosion();

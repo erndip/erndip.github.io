@@ -1,5 +1,11 @@
 @charset "utf-8";
 /* CSS Document */
+@media only screen and (max-width: 800px) {
+    .about .about-content .right {
+        width: 100%;
+    }
+}
+
 body {
 	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
 	background-color: #F2F2F2;
@@ -13,7 +19,7 @@ p {
 	margin-right: auto;
 }
 h1 {
-	font-size: 96px;
+	font-size: 10vw;
 }
 button {
 	width: 45%;
