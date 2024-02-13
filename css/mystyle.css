@@ -15,3 +15,23 @@ p {
 h1 {
 	font-size: 96px;
 }
+button {
+	width: 30%;
+	height: 70px;
+}
+
+#yes{
+	background-color:lightgreen;
+	border: 5px solid darkgreen;
+	border-radius:10px;
+	color:darkgreen;
+	font-weight: bold;
+}
+
+#no{
+	background-color:red;
+	border:5px solid darkred;
+	border-radius:10px;
+	color:darkred;
+	font-weight: bold;
+}

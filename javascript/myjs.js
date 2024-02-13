@@ -1,19 +1,100 @@
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
 let yesButton = document.getElementById("yes");
+let noButton = document.getElementById("no");
 
 let heartGrowing = false;
 let heartGrown = false;
 let heartFixing = false;
+let heartBreaking = false;
+let heartBroken = false;
 let timeStart = 0;
+
+let confetti = [];
+let confettiColors = ["magenta","purple","blue","cyan","lime","yellow"];
+
+let explosion = [];
+let explosionColors = ["orange","yellow","pink","pink","grey","black"];
+
+noButton.onclick = function(){
+	heartGrowing = false;
+	heartGrown = false;
+	heartFixing = false;
+	heartBreaking = true;
+	heartBroken = false;
+
+	timeStart = Date.now();
+	spawnExplosion(0,-75,100);
+}
 
 yesButton.onclick = function(){
 	heartGrowing = true;
 	heartGrown = false;
 	heartFixing = false;
+	heartBreaking = false;
+	heartBroken = false;
 
 	timeStart = Date.now();
 }
+
+function drawText(){
+	
+}
+
+function spawnConfetti(num){
+	confetti = [];
+	for (let i=0;i<num;i++){
+		confetti.push({	"x":Math.floor(Math.random()*canvas.width)-(canvas.width/2),
+						"y":canvas.height/2,
+						"xvel":(Math.random()-0.5)*0.5,
+						"yvel": 16+(Math.random()-0.3)*6,
+						"color": confettiColors[Math.floor(Math.random()*6)]});
+	}
+}
+
+function drawConfetti(){
+	context.save();
+	confetti.forEach(function(con){
+		context.fillStyle = con.color;
+		context.fillRect(con.x-3,con.y-3,6,6);
+		con.x += con.xvel;
+		con.y -= con.yvel;
+		if (con.yvel >=-1){
+			con.yvel -= 0.45;
+		}
+	});
+	context.restore();
+	// Get rid of old confetti
+	confetti = confetti.filter(con => (con.y < 200));
+}
+
+function spawnExplosion(x,y,num){
+	explosion = [];
+	for (let i=0;i<num;i++){
+		explosion.push({"x":x,
+						"y":y,
+						"xvel":(Math.random()-0.5)*7,
+						"yvel":(Math.random()-0.7)*7,
+						"color": explosionColors[Math.floor(Math.random()*6)],
+						"size":10});
+	}
+}
+
+function drawExplosion(){
+	context.save();
+	explosion.forEach(function(p){
+		context.fillStyle = p.color;
+		context.fillRect(p.x,p.y,p.size,p.size);
+		p.x += p.xvel;
+		p.y += p.yvel;
+		p.yvel += 0.07;
+		p.size -= 0.03;
+	});
+	context.restore();
+	// Get rid of old particles
+	explosion = explosion.filter(p => (p.size > 0));
+}
+
 
 function drawLeftHeart(angle, color, strokeColor){
 	context.save();
@@ -87,6 +168,7 @@ function growHeart(){
 		heartGrown = true;
 		heartFixing = true;
 		timeStart = Date.now();
+		spawnConfetti(200);
 	}
 }
 
@@ -151,23 +233,45 @@ function drawFullHeart(){
 	context.restore();
 }
 
+function breakHeart(){
+	let time = (Date.now()-timeStart)/3200;
+	if (time < 0.5){
+		drawLeftHeart(Math.PI/4, "grey", "black");
+		drawRightHeart(-Math.PI/4, "grey", "black");	
+	}
+	else{
+		drawLeftHeart(Math.PI/4 + (time-0.5)**2, "grey", "black");
+		drawRightHeart(-Math.PI/4 - (time-0.5)**2, "grey", "black");	
+	}
+	
+	drawExplosion();
 
-
-drawBrokenHeart();
+	if (time >= 0.5 + (Math.PI/4)){
+		heartBreaking = false;
+		heartBroken = true;
+	}
+}
 
 function draw(ts){
 	context.clearRect(0,0,canvas.width,canvas.height);
 	context.save();
-	context.translate(200,200);
-
+	context.translate(canvas.width/2,200);
+	
 	if(heartGrowing){
 		growHeart(ts);
 	}
 	else if (heartGrown){
+		drawConfetti();
 		drawFullHeart();
 	}
 	if (heartFixing){
 		fixHeart();
+	}
+	if (heartBreaking) {
+		breakHeart();
+	}
+	else if (heartBroken){
+		drawBrokenHeart();
 	}
 
 	context.restore();
