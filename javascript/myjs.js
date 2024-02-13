@@ -201,7 +201,6 @@ function growHeart(){
 		heartFixing = true;
 		timeStart = Date.now();
 		spawnConfetti(200);
-		texts.push({"x":canvas.width/2,"y":canvas.height/2-50,"time":0});
 	}
 }
 
