@@ -57,7 +57,7 @@ function drawText(){
 
 	texts.forEach(function(t){
 		context.fillStyle = `rgba(255,0,0,${1-t.time})`
-		context.font = `${100*t.time}px Arial`;
+		context.font = `${10+90*t.time}px Arial`;
 		context.fillText("I Love You!!",t.x,t.y);
 
 		t.time+= 0.01;

@@ -16,8 +16,9 @@ h1 {
 	font-size: 96px;
 }
 button {
-	width: 30%;
-	height: 70px;
+	width: 45%;
+	height: 200;
+	font-size: 150px;
 }
 
 #yes{
