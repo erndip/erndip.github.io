@@ -10,11 +10,23 @@ let heartBreaking = false;
 let heartBroken = false;
 let timeStart = 0;
 
+let texts = [];
+
 let confetti = [];
 let confettiColors = ["magenta","purple","blue","cyan","lime","yellow"];
 
 let explosion = [];
 let explosionColors = ["orange","yellow","pink","pink","grey","black"];
+
+canvas.onclick = function(event){
+	let mouseX = event.clientX;
+    let mouseY = event.clientY;
+    let box = (event.target).getBoundingClientRect();
+    mouseX -= box.left;
+    mouseY -= box.top;
+
+	texts.push({"x":mouseX,"y":mouseY,"time":0});
+}
 
 noButton.onclick = function(){
 	heartGrowing = false;
@@ -38,14 +50,29 @@ yesButton.onclick = function(){
 }
 
 function drawText(){
-	
+	context.save();
+
+	context.textAlign = "center";
+	context.textBaseline = "middle";
+
+	texts.forEach(function(t){
+		context.fillStyle = `rgba(255,0,0,${1-t.time})`
+		context.font = `${100*t.time}px Arial`;
+		context.fillText("I Love You!!",t.x,t.y);
+
+		t.time+= 0.01;
+	});
+
+	texts = texts.filter(t => (t.time < 1));
+
+	context.restore();
 }
 
 function spawnConfetti(num){
 	confetti = [];
 	for (let i=0;i<num;i++){
-		confetti.push({	"x":Math.floor(Math.random()*canvas.width)-(canvas.width/2),
-						"y":canvas.height/2,
+		confetti.push({	"x":Math.floor((Math.random()-0.5)*canvas.width),
+						"y":0,
 						"xvel":(Math.random()-0.5)*0.5,
 						"yvel": 16+(Math.random()-0.3)*6,
 						"color": confettiColors[Math.floor(Math.random()*6)]});
@@ -205,6 +232,7 @@ function fixHeart(){
 	context.fill();
 	context.restore();
 
+	texts.push({"x":0,"y":-50,"time":0});
 
 	if (time >= timeLimit){
 		heartFixing = false;
@@ -255,8 +283,9 @@ function breakHeart(){
 function draw(ts){
 	context.clearRect(0,0,canvas.width,canvas.height);
 	context.save();
-	context.translate(canvas.width/2,200);
+	context.translate(canvas.width/2,100+canvas.height/2);
 	
+	context.scale(2,2);
 	if(heartGrowing){
 		growHeart(ts);
 	}
@@ -273,8 +302,10 @@ function draw(ts){
 	else if (heartBroken){
 		drawBrokenHeart();
 	}
-
+	
 	context.restore();
+	drawText();
+
 	window.requestAnimationFrame(draw);
 }
 window.requestAnimationFrame(draw);
