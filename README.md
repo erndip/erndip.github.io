@@ -1,1 +1,1 @@
-This is a Valentine's Day webpage I made for my girlfriend. I used my personal github website so I could send her a link. I'll update it when I have a more interesting webpage to upload.
+Welcome to my website! This is where I host tools, toys, and projects I work on. Mostly it's for my own use, but feel free to poke around!
