@@ -1,3 +1,23 @@
+.cardWrapper {
+  position: relative;
+}
+
+.repoLink {
+  position: absolute;
+  bottom: 0.7rem;
+  right: 0.75rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  transition: color 0.15s ease;
+  line-height: 1;
+}
+
+.repoLink:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
 .card {
   display: block;
   background: var(--bg-card);
