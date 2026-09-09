@@ -1,0 +1,113 @@
+/* Outer wrapper: perspective + hover lift (only when interactive) */
+.wrapper {
+  perspective: 1200px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s ease;
+}
+
+.wrapper.interactive:hover {
+  transform: translateY(-3px);
+}
+
+/* Flip container */
+.inner {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.inner.flipped {
+  transform: rotateY(180deg);
+}
+
+/* Front face — normal flow, determines card height */
+.front {
+  backface-visibility: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wrapper.interactive:hover .front {
+  border-color: var(--border-hover);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--accent-glow);
+}
+
+/* Back face — absolutely fills .inner (sized by front) */
+.back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Front face internals — match ProjectCard */
+.thumbnailWrapper {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1a2a4a 0%, #0d1929 100%);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 15, 23, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.wrapper.interactive:hover .overlay {
+  opacity: 1;
+}
+
+.description {
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  text-align: center;
+  line-height: 1.55;
+}
+
+.cardFooter {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Canvas fills the back face, stretching to remove side letterboxing */
+.gifCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}

@@ -19,7 +19,7 @@ interface Props {
 }
 
 export default function ProjectCard({ project }: Props) {
-  const href = project.liveUrl ?? project.repoUrl
+  const href = project.liveUrl ?? project.repoUrl ?? '#'
 
   return (
     <div className={styles.cardWrapper}>
@@ -48,7 +48,7 @@ export default function ProjectCard({ project }: Props) {
           <span className={styles.title}>{project.title}</span>
         </div>
       </a>
-      {project.liveUrl && (
+      {project.liveUrl && project.repoUrl && (
         <a
           href={project.repoUrl}
           target="_blank"

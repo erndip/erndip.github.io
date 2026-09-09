@@ -1,5 +1,6 @@
 import { projects } from './data/projects'
 import ProjectCard from './components/ProjectCard'
+import ToyCard from './components/ToyCard'
 import styles from './App.module.css'
 
 export default function App() {
@@ -29,9 +30,19 @@ export default function App() {
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>Toys</h2>
             <div className={styles.grid}>
-              {toys.map(project => (
-                <ProjectCard key={project.id} project={project} />
-              ))}
+              {toys.map(project =>
+                project.gifSrc ? (
+                  <ToyCard
+                    key={project.id}
+                    title={project.title}
+                    description={project.description}
+                    gifSrc={project.gifSrc}
+                    thumbnail={project.thumbnail}
+                  />
+                ) : (
+                  <ProjectCard key={project.id} project={project} />
+                )
+              )}
             </div>
           </section>
         )}

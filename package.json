@@ -4,7 +4,6 @@
   "version": "0.1.0",
   "type": "module",
   "homepage": "https://erndip.github.io",
-
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -12,6 +11,7 @@
     "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
+    "gifuct-js": "^2.1.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

@@ -3,8 +3,9 @@ export interface Project {
   title: string
   description: string
   thumbnail?: string
-  repoUrl: string
+  repoUrl?: string
   liveUrl?: string
+  gifSrc?: string
   category: 'tool' | 'toy'
 }
 
@@ -27,10 +28,11 @@ export const projects: Project[] = [
     category: 'tool',
   },
   {
-    id: 'example-toy',
-    title: 'Example Toy',
-    description: 'Replace this with your real toy. Each card is just one object in this array.',
-    repoUrl: 'https://github.com/erndip',
+    id: 'sneaky-cat',
+    title: 'Sample Toy',
+    description: 'Cat GIF',
+    thumbnail: '/images/sample_toy_thumbnail.jpg',
+    gifSrc: '/images/sneakycat.gif',
     category: 'toy',
   },
 ]
