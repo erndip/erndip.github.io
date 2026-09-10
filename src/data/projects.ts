@@ -13,7 +13,7 @@ export const projects: Project[] = [
   {
     id: 'sunwise-tracker',
     title: 'Sunwise Tracker',
-    description: 'UV index tracker with location search and Fitzpatrick skin-type–aware sun exposure guidance.',
+    description: 'UVI integral calculator and tracker with realtime location weather data.',
     thumbnail: '/images/sunwise_tracker_thumbnail.png',
     repoUrl: 'https://github.com/erndip/sunwise-tracker',
     liveUrl: 'https://erndip.github.io/sunwise-tracker',

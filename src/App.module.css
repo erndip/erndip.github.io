@@ -44,6 +44,26 @@
   margin-bottom: 1.25rem;
 }
 
+.aboutText {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 650px;
+}
+
+.aboutList {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 650px;
+  margin: 0;
+  padding-left: 1.6rem;
+}
+
+.aboutList li {
+  margin-bottom: 0.25rem;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));

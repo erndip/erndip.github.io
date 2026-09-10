@@ -46,6 +46,21 @@ export default function App() {
             </div>
           </section>
         )}
+
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>About Me</h2>
+          <p className={styles.aboutText}>
+            I'm Ernie. this is where I put things I've made. Some are shiny and polished, some are broken and half-baked. Please poke around.
+          </p>
+          <p className={styles.aboutText}>Find me at:</p>
+          <ul className={styles.aboutList}>
+            <li>Github <a href="https://github.com/erndip" target="_blank" rel="noopener noreferrer">@erndip</a></li>
+            <li>LinkedIn <a href="https://linkedin.com/in/erniedippold" target="_blank" rel="noopener noreferrer">@erniedippold</a></li>
+            <li>email: <a href="mailto:ernie.dippold@gmail.com">ernie.dippold@gmail.com</a></li>
+          </ul>
+        </section>
+
+
       </main>
 
       <footer className={styles.footer}>
