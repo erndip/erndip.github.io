@@ -1,0 +1,84 @@
+.card {
+  --line: 1.6rem;
+  max-width: 720px;
+  background: var(--bg-primary);
+  border: 0px solid var(--border);
+  border-radius: 8px;
+  padding: 0rem 0rem;
+}
+
+/* Everything inside sits on a --line grid so the clip lands on 10 lines (title + date + 8 of body). */
+.preview {
+  line-height: var(--line);
+  max-height: calc(10 * var(--line) + 0.8rem);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent);
+  mask-image: linear-gradient(to bottom, #000 50%, transparent);
+}
+
+.title {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.title:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.date {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.body {
+  margin-top: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.body > * + * {
+  margin-top: 0.8rem;
+}
+
+.body h1,
+.body h2,
+.body h3,
+.body h4 {
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.body ul,
+.body ol {
+  padding-left: 1.6rem;
+}
+
+.body img {
+  max-width: 100%;
+}
+
+.body pre {
+  white-space: pre-wrap;
+  font-size: 0.85rem;
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  padding: 0 0.75rem;
+}
+
+.readMore {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: background 0.15s ease;
+}
+
+.readMore:hover {
+  background: var(--accent-glow);
+  text-decoration: none;
+}

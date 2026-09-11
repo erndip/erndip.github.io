@@ -1,6 +1,7 @@
 import { projects } from './data/projects'
 import ProjectCard from './components/ProjectCard'
 import ToyCard from './components/ToyCard'
+import LatestRambling, { RAMBLINGS_URL } from './components/LatestRambling'
 import styles from './App.module.css'
 
 export default function App() {
@@ -46,6 +47,13 @@ export default function App() {
             </div>
           </section>
         )}
+
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>
+            <a href={RAMBLINGS_URL}>Ramblings</a>
+          </h2>
+          <LatestRambling />
+        </section>
 
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>About Me</h2>
